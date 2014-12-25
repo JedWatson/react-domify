@@ -1,3 +1,4 @@
+require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"react-domify":[function(require,module,exports){
 var React = require('react');
 
 var styles = {
@@ -68,10 +69,10 @@ function transform(obj, fromRecur) {
 		for (var i = 0; i < obj.length; i++) {
 			console.log(obj[i])
 			children.push(
-				<div key={'i' + i} style={{ paddingLeft: '20px' }}>
-					{transform(obj[i], nextLevel)}
-					{(i < obj.length - 1) ? ',' : null}
-				</div>
+				React.createElement("div", {key: 'i' + i, style: { paddingLeft: '20px'}}, 
+					transform(obj[i], nextLevel), 
+					(i < obj.length - 1) ? ',' : null
+				)
 			);
 		}
 		
@@ -94,10 +95,10 @@ function transform(obj, fromRecur) {
 		for (var key in obj) {
 			if (typeof obj[key] !== 'function') {
 				children.push(
-					<div key={key} style={{ paddingLeft: fromRecur ? '20px' : '0' }}>
-						<span style={{ paddingRight: '5px', cursor: 'default' }}>{key}:</span>
-						{transform(obj[key], nextLevel)}
-					</div>
+					React.createElement("div", {key: key, style: { paddingLeft: fromRecur ? '20px' : '0'}}, 
+						React.createElement("span", {style: { paddingRight: '5px', cursor: 'default'}}, key, ":"), 
+						transform(obj[key], nextLevel)
+					)
 				);
 			}
 		}
@@ -108,11 +109,11 @@ function transform(obj, fromRecur) {
 		
 	}
 
-	return <div>{children}</div>;
+	return React.createElement("div", null, children);
 
 }
 
-var DOMify = React.createClass({
+var DOMify = React.createClass({displayName: "DOMify",
 	
 	render: function() {
 		return transform(this.props.value);
@@ -121,3 +122,5 @@ var DOMify = React.createClass({
 });
 
 module.exports = DOMify;
+
+},{"react":undefined}]},{},[]);
