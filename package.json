@@ -13,7 +13,7 @@
     "url": "https://github.com/JedWatson/react-domify/issues"
   },
   "dependencies": {
-    "react": "^0.12.1",
+    "react": "^0.12.2",
     "reactify": "^0.17.1"
   },
   "devDependencies": {
@@ -35,6 +35,13 @@
   "readmeFilename": "README.md",
   "keywords": [
     "react",
-    "react-component"
+    "react-component",
+    "data",
+    "enum",
+    "enumerate",
+    "visualisation",
+    "json",
+    "debug",
+    "debugging"
   ]
 }
