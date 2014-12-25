@@ -30,7 +30,7 @@ npm install react-domify --save
 
 ## Usage
 
-Provide the variable to render as the `data` property.
+Provide the variable to render as the `value` property.
 
 ```
 var DOMify = require('react-domify');
@@ -48,7 +48,7 @@ var data = {
   ]
 };
 
-<DOMify data={data} />
+<DOMify value={data} />
 ```
 
 ### License
