@@ -66,7 +66,6 @@ function transform(obj, fromRecur) {
 		// rtn += '</' + tag + '><div style="padding-left: 20px;">';
 		// 
 		for (var i = 0; i < obj.length; i++) {
-			console.log(obj[i])
 			children.push(
 				<div key={'i' + i} style={{ paddingLeft: '20px' }}>
 					{transform(obj[i], nextLevel)}
