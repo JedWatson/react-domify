@@ -23,6 +23,8 @@ module.exports = {
 		name: COMPONENT_NAME,
 		// This is the directory to load the source file from
 		src: 'src',
+		// This is the directory to transpile JSX/ES6 to
+		lib: 'lib',
 		// This is the directory to build the distribution to
 		dist: 'dist',
 		// This is the name of the package that will be exported

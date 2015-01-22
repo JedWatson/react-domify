@@ -2,7 +2,7 @@
   "name": "react-domify",
   "version": "0.1.1",
   "description": "React Domify",
-  "main": "src/DOMify.js",
+  "main": "lib/DOMify.js",
   "author": "Jed Watson",
   "homepage": "https://github.com/JedWatson/react-domify",
   "repository": {
@@ -13,18 +13,11 @@
     "url": "https://github.com/JedWatson/react-domify/issues"
   },
   "dependencies": {
-    "react": "^0.12.2",
-    "reactify": "^0.17.1"
+    "react": "^0.12.2"
   },
   "devDependencies": {
-    "react-component-gulp-tasks": "^0.1.1",
-    "gulp": "^3.8.10"
-  },
-  "browser": "src/DOMify.js",
-  "browserify": {
-    "transform": [
-      "reactify"
-    ]
+    "gulp": "^3.8.10",
+    "react-component-gulp-tasks": "^0.2.1"
   },
   "browserify-shim": {
     "react": "global:React"
