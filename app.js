@@ -16,7 +16,8 @@ var data = {
 
 var App = React.createClass({
   displayName: "App",
-  render: function () {
+
+  render: function render() {
     return React.createElement(
       "div",
       null,
