@@ -8,8 +8,8 @@ var taskConfig = {
 	},
 
 	example: {
-		src: 'examples/src',
-		dist: 'examples/dist',
+		src: 'example/src',
+		dist: 'example/dist',
 		files: [
 			'index.html',
 			'.gitignore'
