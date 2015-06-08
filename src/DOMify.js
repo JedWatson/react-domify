@@ -34,9 +34,9 @@ var styles = {
 
 function transform(obj, fromRecur) {
 
-	var tag = (fromRecur) ? 'span' : 'div',
-		nextLevel = (fromRecur || 0) + 1,
-		children = [];
+	var tag = (fromRecur) ? 'span' : 'div';
+	var nextLevel = (fromRecur || 0) + 1;
+	var children = [];
 	
 	// strings
 	if (typeof obj === 'string') {
@@ -61,7 +61,7 @@ function transform(obj, fromRecur) {
 			return React.createElement(tag, { style: styles.empty }, 'Array: []');
 		}
 		
-		children.push(React.createElement(tag, { style: styles.array }, 'Array: ['));
+		children.push(React.createElement(tag, { key: '__array:open__', style: styles.array }, 'Array: ['));
 		
 		// rtn += '</' + tag + '><div style="padding-left: 20px;">';
 		// 
@@ -74,7 +74,7 @@ function transform(obj, fromRecur) {
 			);
 		}
 		
-		children.push(React.createElement(tag, { style: styles.array }, ']'));
+		children.push(React.createElement(tag, { key: '__array:close__', style: styles.array }, ']'));
 		
 	}
 	// objects
@@ -87,7 +87,7 @@ function transform(obj, fromRecur) {
 		}
 		
 		if (fromRecur) {
-			children.push(React.createElement(tag, { style: styles.object }, 'Object: {'));
+			children.push(React.createElement(tag, { key: '__object:open__', style: styles.object }, 'Object: {'));
 		}
 		
 		for (var key in obj) {
@@ -102,7 +102,7 @@ function transform(obj, fromRecur) {
 		}
 		
 		if (fromRecur) {
-			children.push(React.createElement(tag, { style: styles.object }, '}'));
+			children.push(React.createElement(tag, { key: '__object:close__', style: styles.object }, '}'));
 		}
 		
 	}
@@ -112,11 +112,9 @@ function transform(obj, fromRecur) {
 }
 
 var DOMify = React.createClass({
-	
-	render: function() {
+	render () {
 		return transform(this.props.value);
 	}
-	
 });
 
 module.exports = DOMify;
