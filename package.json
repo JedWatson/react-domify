@@ -24,7 +24,17 @@
     "react": "global:React"
   },
   "scripts": {
-    "test": "echo \"no tests yet\" && exit 0"
+    "build": "gulp clean && NODE_ENV=production gulp build",
+    "bump": "gulp bump",
+    "bump:major": "gulp bump:major",
+    "bump:minor": "gulp bump:minor",
+    "start": "gulp dev",
+    "examples": "gulp dev:server",
+    "lint": "eslint ./; true",
+    "publish:site": "gulp publish:examples",
+    "release": "gulp release",
+    "test": "echo \"no tests yet\" && exit 0",
+    "watch": "gulp watch:lib"
   },
   "readmeFilename": "README.md",
   "keywords": [
