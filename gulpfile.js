@@ -1,10 +1,13 @@
-var gulp = require('gulp'),
-    initGulpTasks = require('react-component-gulp-tasks');
+var gulp = require('gulp');
+var initGulpTasks = require('react-component-gulp-tasks');
 
 var taskConfig = {
 
 	component: {
-		name: 'DOMify'
+		name: 'DOMify',
+		dependencies: [
+			'react'
+		]
 	},
 
 	example: {
@@ -15,7 +18,7 @@ var taskConfig = {
 			'.gitignore'
 		],
 		scripts: [
-			'app.js'
+			'example.js'
 		],
 		less: [
 			'example.less'
