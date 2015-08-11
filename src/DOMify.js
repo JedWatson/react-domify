@@ -29,67 +29,69 @@ var styles = {
 	object: {
 		color: '#0b89b6',
 		cursor: 'default'
+	},
+	comma: {
+		color: '#999999',
+		cursor: 'default'
 	}
 };
 
-function transform(obj, fromRecur) {
+function transform(obj, fromRecur, comma) {
 
 	var tag = (fromRecur) ? 'span' : 'div';
 	var nextLevel = (fromRecur || 0) + 1;
 	var children = [];
-	
+	comma = comma ? <span style={styles.comma}>,</span> : null;
+
 	// strings
 	if (typeof obj === 'string') {
-		return React.createElement(tag, { style: styles.string }, obj);
+		return React.createElement(tag, { style: styles.string }, obj, comma);
 	}
 	// booleans, null and undefined
 	else if (typeof obj === 'boolean' || obj === null || obj === undefined) {
-		return React.createElement(tag, { style: styles.bool }, String(obj));
+		return React.createElement(tag, { style: styles.bool }, String(obj), comma);
 	}
 	// numbers
 	else if (typeof obj === 'number') {
-		return React.createElement(tag, { style: styles.number }, String(obj));
+		return React.createElement(tag, { style: styles.number }, String(obj), comma);
 	}
 	// dates
 	else if (Object.prototype.toString.call(obj) === '[object Date]') {
-		return React.createElement(tag, { style: styles.date }, String(obj));
+		return React.createElement(tag, { style: styles.date }, String(obj), comma);
 	}
 	// arrays
 	else if (Array.isArray(obj)) {
-		
+
 		if (!obj.length) {
 			return React.createElement(tag, { style: styles.empty }, 'Array: []');
 		}
-		
+
 		children.push(React.createElement(tag, { key: '__array:open__', style: styles.array }, 'Array: ['));
-		
-		// rtn += '</' + tag + '><div style="padding-left: 20px;">';
-		// 
+
 		for (var i = 0; i < obj.length; i++) {
 			children.push(
 				<div key={'i' + i} style={{ paddingLeft: '20px' }}>
-					{transform(obj[i], nextLevel)}
-					{(i < obj.length - 1) ? ',' : null}
+					{transform(obj[i], nextLevel, i < obj.length - 1)}
 				</div>
 			);
 		}
-		
+
 		children.push(React.createElement(tag, { key: '__array:close__', style: styles.array }, ']'));
-		
+
 	}
 	// objects
 	else if (obj && typeof obj === 'object') {
-		
+
 		var len = Object.keys(obj).length;
-	
+
 		if (fromRecur && !len) {
 			return React.createElement(tag, { style: styles.empty }, 'Object: {}');
 		}
-		
+
 		if (fromRecur) {
 			children.push(React.createElement(tag, { key: '__object:open__', style: styles.object }, 'Object: {'));
 		}
-		
+
 		for (var key in obj) {
 			if (typeof obj[key] !== 'function') {
 				children.push(
@@ -100,14 +102,14 @@ function transform(obj, fromRecur) {
 				);
 			}
 		}
-		
+
 		if (fromRecur) {
 			children.push(React.createElement(tag, { key: '__object:close__', style: styles.object }, '}'));
 		}
-		
+
 	}
 
-	return <div>{children}</div>;
+	return <div>{children}{comma}</div>;
 
 }
 
