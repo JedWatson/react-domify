@@ -53,5 +53,4 @@ var data = {
 
 ### License
 
-MIT. Copyright (c) 2014 Jed Watson.
-
+MIT. Copyright (c) 2016 Jed Watson.
