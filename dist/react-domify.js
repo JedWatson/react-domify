@@ -132,7 +132,11 @@ var DOMify = React.createClass({
 	displayName: 'DOMify',
 
 	render: function render() {
-		return transform(this.props.value);
+		return React.createElement(
+			'div',
+			{ className: this.props.className, style: this.props.style },
+			transform(this.props.value)
+		);
 	}
 });
 
