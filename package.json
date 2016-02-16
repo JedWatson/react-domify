@@ -36,6 +36,7 @@
     "test": "echo \"no tests yet\" && exit 0",
     "watch": "gulp watch:lib"
   },
+  "license": "MIT",
   "readmeFilename": "README.md",
   "keywords": [
     "react",
