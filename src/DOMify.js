@@ -3,40 +3,40 @@ var React = require('react');
 var styles = {
 	string: {
 		color: '#0e4889',
-		cursor: 'default'
+		cursor: 'default',
 	},
 	bool: {
 		color: '#06624b',
 		cursor: 'default',
-		fontStyle: 'italic'
+		fontStyle: 'italic',
 	},
 	number: {
 		color: '#ca000a',
-		cursor: 'default'
+		cursor: 'default',
 	},
 	date: {
 		color: '#009f7b',
-		cursor: 'default'
+		cursor: 'default',
 	},
 	empty: {
 		color: '#999999',
-		cursor: 'default'
+		cursor: 'default',
 	},
 	array: {
 		color: '#666666',
-		cursor: 'default'
+		cursor: 'default',
 	},
 	object: {
 		color: '#0b89b6',
-		cursor: 'default'
+		cursor: 'default',
 	},
 	comma: {
 		color: '#999999',
-		cursor: 'default'
-	}
+		cursor: 'default',
+	},
 };
 
-function transform(obj, fromRecur, comma) {
+function transform (obj, fromRecur, comma) {
 
 	var tag = (fromRecur) ? 'span' : 'div';
 	var nextLevel = (fromRecur || 0) + 1;
