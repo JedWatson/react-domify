@@ -115,8 +115,12 @@ function transform (obj, fromRecur, comma) {
 
 var DOMify = React.createClass({
 	render () {
-		return transform(this.props.value);
-	}
+		return (
+			<div className={this.props.className} style={this.props.style}>
+				{transform(this.props.value)}
+			</div>
+		);
+	},
 });
 
 module.exports = DOMify;
