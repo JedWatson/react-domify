@@ -32,91 +32,98 @@ var styles = {
 	object: {
 		color: '#0b89b6',
 		cursor: 'default'
+	},
+	comma: {
+		color: '#999999',
+		cursor: 'default'
 	}
 };
 
-function transform(obj, fromRecur) {
+function transform(obj, fromRecur, comma) {
 
 	var tag = fromRecur ? 'span' : 'div';
 	var nextLevel = (fromRecur || 0) + 1;
 	var children = [];
+	comma = comma ? React.createElement(
+		'span',
+		{ style: styles.comma },
+		','
+	) : null;
 
 	// strings
 	if (typeof obj === 'string') {
-		return React.createElement(tag, { style: styles.string }, obj);
+		return React.createElement(tag, { style: styles.string }, obj, comma);
 	}
 	// booleans, null and undefined
 	else if (typeof obj === 'boolean' || obj === null || obj === undefined) {
-		return React.createElement(tag, { style: styles.bool }, String(obj));
-	}
-	// numbers
-	else if (typeof obj === 'number') {
-		return React.createElement(tag, { style: styles.number }, String(obj));
-	}
-	// dates
-	else if (Object.prototype.toString.call(obj) === '[object Date]') {
-		return React.createElement(tag, { style: styles.date }, String(obj));
-	}
-	// arrays
-	else if (Array.isArray(obj)) {
-
-		if (!obj.length) {
-			return React.createElement(tag, { style: styles.empty }, 'Array: []');
+			return React.createElement(tag, { style: styles.bool }, String(obj), comma);
 		}
-
-		children.push(React.createElement(tag, { key: '__array:open__', style: styles.array }, 'Array: ['));
-
-		// rtn += '</' + tag + '><div style="padding-left: 20px;">';
-		//
-		for (var i = 0; i < obj.length; i++) {
-			children.push(React.createElement(
-				'div',
-				{ key: 'i' + i, style: { paddingLeft: '20px' } },
-				transform(obj[i], nextLevel),
-				i < obj.length - 1 ? ',' : null
-			));
-		}
-
-		children.push(React.createElement(tag, { key: '__array:close__', style: styles.array }, ']'));
-	}
-	// objects
-	else if (obj && typeof obj === 'object') {
-
-		var len = Object.keys(obj).length;
-
-		if (fromRecur && !len) {
-			return React.createElement(tag, { style: styles.empty }, 'Object: {}');
-		}
-
-		if (fromRecur) {
-			children.push(React.createElement(tag, { key: '__object:open__', style: styles.object }, 'Object: {'));
-		}
-
-		for (var key in obj) {
-			if (typeof obj[key] !== 'function') {
-				children.push(React.createElement(
-					'div',
-					{ key: key, style: { paddingLeft: fromRecur ? '20px' : '0' } },
-					React.createElement(
-						'span',
-						{ style: { paddingRight: '5px', cursor: 'default' } },
-						key,
-						':'
-					),
-					transform(obj[key], nextLevel)
-				));
+		// numbers
+		else if (typeof obj === 'number') {
+				return React.createElement(tag, { style: styles.number }, String(obj), comma);
 			}
-		}
+			// dates
+			else if (Object.prototype.toString.call(obj) === '[object Date]') {
+					return React.createElement(tag, { style: styles.date }, String(obj), comma);
+				}
+				// arrays
+				else if (Array.isArray(obj)) {
 
-		if (fromRecur) {
-			children.push(React.createElement(tag, { key: '__object:close__', style: styles.object }, '}'));
-		}
-	}
+						if (!obj.length) {
+							return React.createElement(tag, { style: styles.empty }, 'Array: []');
+						}
+
+						children.push(React.createElement(tag, { key: '__array:open__', style: styles.array }, 'Array: ['));
+
+						for (var i = 0; i < obj.length; i++) {
+							children.push(React.createElement(
+								'div',
+								{ key: 'i' + i, style: { paddingLeft: '20px' } },
+								transform(obj[i], nextLevel, i < obj.length - 1)
+							));
+						}
+
+						children.push(React.createElement(tag, { key: '__array:close__', style: styles.array }, ']'));
+					}
+					// objects
+					else if (obj && typeof obj === 'object') {
+
+							var len = Object.keys(obj).length;
+
+							if (fromRecur && !len) {
+								return React.createElement(tag, { style: styles.empty }, 'Object: {}');
+							}
+
+							if (fromRecur) {
+								children.push(React.createElement(tag, { key: '__object:open__', style: styles.object }, 'Object: {'));
+							}
+
+							for (var key in obj) {
+								if (typeof obj[key] !== 'function') {
+									children.push(React.createElement(
+										'div',
+										{ key: key, style: { paddingLeft: fromRecur ? '20px' : '0' } },
+										React.createElement(
+											'span',
+											{ style: { paddingRight: '5px', cursor: 'default' } },
+											key,
+											':'
+										),
+										transform(obj[key], nextLevel)
+									));
+								}
+							}
+
+							if (fromRecur) {
+								children.push(React.createElement(tag, { key: '__object:close__', style: styles.object }, '}'));
+							}
+						}
 
 	return React.createElement(
 		'div',
 		null,
-		children
+		children,
+		comma
 	);
 }
 
@@ -124,7 +131,11 @@ var DOMify = React.createClass({
 	displayName: 'DOMify',
 
 	render: function render() {
-		return transform(this.props.value);
+		return React.createElement(
+			'div',
+			{ className: this.props.className, style: this.props.style },
+			transform(this.props.value)
+		);
 	}
 });
 
