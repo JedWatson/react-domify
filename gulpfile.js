@@ -6,8 +6,8 @@ var taskConfig = {
 	component: {
 		name: 'DOMify',
 		dependencies: [
-			'react'
-		]
+			'react',
+		],
 	},
 
 	example: {
@@ -15,15 +15,15 @@ var taskConfig = {
 		dist: 'example/dist',
 		files: [
 			'index.html',
-			'.gitignore'
+			'.gitignore',
 		],
 		scripts: [
-			'example.js'
+			'example.js',
 		],
 		less: [
-			'example.less'
-		]
-	}
+			'example.less',
+		],
+	},
 
 };
 
