@@ -16,9 +16,12 @@
     "react": "^0.14.0"
   },
   "devDependencies": {
+    "eslint": "^2.8.0",
+    "eslint-config-keystone": "^2.1.0",
+    "eslint-plugin-react": "^4.3.0",
+    "gulp": "^3.9.1",
     "react": "^0.14.0",
-    "react-component-gulp-tasks": "^0.7.7",
-    "gulp": "^3.9.1"
+    "react-component-gulp-tasks": "^0.7.7"
   },
   "browserify-shim": {
     "react": "global:React"
@@ -30,7 +33,8 @@
     "bump:minor": "gulp bump:minor",
     "start": "gulp dev",
     "examples": "gulp dev:server",
-    "lint": "eslint ./; true",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
     "publish:site": "gulp publish:examples",
     "release": "gulp release",
     "test": "echo \"no tests yet\" && exit 0",
