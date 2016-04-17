@@ -1,6 +1,6 @@
 {
   "name": "react-domify",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "React Domify",
   "main": "lib/DOMify.js",
   "author": "Jed Watson",
