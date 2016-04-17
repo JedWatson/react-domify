@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var DOMify = require('react-domify');
 
 var data = {
@@ -24,4 +25,4 @@ var App = React.createClass({
 	},
 });
 
-React.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
