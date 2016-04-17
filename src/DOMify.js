@@ -95,7 +95,7 @@ function transform (obj, fromRecur, comma) {
 		for (var key in obj) {
 			if (typeof obj[key] !== 'function') {
 				children.push(
-					<div key={key} style={{ paddingLeft: fromRecur ? '20px' : '0' }}>
+					<div key={key} style={{ paddingLeft: fromRecur ? '20px' : '0px' }}>
 						<span style={{ paddingRight: '5px', cursor: 'default' }}>{key}:</span>
 						{transform(obj[key], nextLevel)}
 					</div>
