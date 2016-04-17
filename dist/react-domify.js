@@ -103,7 +103,7 @@ function transform(obj, fromRecur, comma) {
 								if (typeof obj[key] !== 'function') {
 									children.push(React.createElement(
 										'div',
-										{ key: key, style: { paddingLeft: fromRecur ? '20px' : '0' } },
+										{ key: key, style: { paddingLeft: fromRecur ? '20px' : '0px' } },
 										React.createElement(
 											'span',
 											{ style: { paddingRight: '5px', cursor: 'default' } },
